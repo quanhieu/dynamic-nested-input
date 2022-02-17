@@ -6,15 +6,26 @@ import ReactDOM from "react-dom";
 import "./styles.css";
 
 const defaultValues = {
-  test: [
+  domain: [
     {
-      name: "useFieldArray1",
-      nestedArray: [{ field1: "field1", field2: "field2" }]
+      domainField: 'http://testphp.vulnweb.com/',
+      subdomain: [
+        {
+          subdomainField: 'http://testphp.vulnweb.com/artists.php'
+        },
+        {
+          subdomainField: 'http://testphp.vulnweb.com/categories.php'
+        },
+      ]
     },
     {
-      name: "useFieldArray2",
-      nestedArray: [{ field1: "field1", field2: "field2" }]
-    }
+      domainField: 'https://knexjs.org/',
+      subdomain: [
+        {
+          subdomainField: 'https://knexjs.org/#Builder-del%20/%20delete'
+        }
+      ]
+    },
   ]
 };
 
@@ -23,10 +34,8 @@ function App() {
     control,
     register,
     handleSubmit,
-    getValues,
     errors,
     reset,
-    setValue
   } = useForm({
     defaultValues
   });
@@ -41,7 +50,7 @@ function App() {
       </p>
 
       <FieldArray
-        {...{ control, register, defaultValues, getValues, setValue, errors }}
+        {...{ control, register, defaultValues, errors }}
       />
 
       <button type="button" onClick={() => reset(defaultValues)}>
